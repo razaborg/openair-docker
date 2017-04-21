@@ -1,4 +1,14 @@
-# Warning : docker for Mac users (windows users might be concerned too)
+# openair-docker
+
+This repo as for goal to present a properly-dockerized version of the openair-cn project.
+
+### Next steps
+
++ Use an external freeDiameter container for the MME/HSS
++ Use and external mysql container for the HSS
++ Make a SP_GW container
+
+### Warning : docker for Mac users (windows users might be concerned too)
 
 The SCTP protocol must be enabled (kernel module) in the Hyperkit VM running on alpine Linux.
 
@@ -9,12 +19,13 @@ To enable it, see those posts :
 # Architecture
 
 The repo is organized as following :
-.
-├── HSS
-│   └── config
-├── MME
-│   └── config
-└── openair-cn
+
+    .
+    ├── HSS
+    │   └── config
+    ├── MME
+    │   └── config
+    └── openair-cn
 
 A docker-compose file is located at the root allowing you to run a working configuration for the MME/HSS part of the EPC.
 
@@ -53,4 +64,4 @@ And in a more archaic way :
     docker run -it -h "mme.openair4G.eur" -v $(pwd)/config:/config openair-mme
 
 
-But the IP raw defined in the config file (freediameter configuration) will probably fuck everything up... You're warned :P
+But the IP raw defined in the config file (freediameter configuration) will probably fuck everything up... You're warned
