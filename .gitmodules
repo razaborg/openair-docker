@@ -1,0 +1,3 @@
+[submodule "openair-cn"]
+	path = openair-cn
+	url = ./openair-cn
