@@ -1,0 +1,35 @@
+version: '2.1'
+
+services:
+  hss:
+    image: openair-hss
+    hostname: "hss"
+    domainname: "openair4G.eur"
+    container_name: openair-hss
+    volumes:
+      - ./HSS/config:/config
+    networks:
+      openair:
+        ipv4_address: 172.13.37.10
+  
+  mme:
+    image: openair-mme
+    hostname: "mme"
+    domainname: "openair4G.eur"
+    container_name: openair-mme
+    volumes:
+      - ./MME/config:/config
+    networks:
+      openair:
+        ipv4_address: 172.13.37.20
+    depends_on:
+      - hss
+
+networks:
+  openair:
+    driver: bridge
+    enable_ipv6: false
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.13.37.0/24
