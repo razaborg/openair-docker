@@ -10,7 +10,7 @@ RUN ./SCRIPTS/build_mme -i -f
 
 COPY startup.sh ./
 RUN chmod +x startup.sh
-#ENTRYPOINT /root/openair-cn/startup.sh
 
-CMD /root/openair-cn/startup.sh
+ENTRYPOINT /root/openair-cn/startup.sh
+
 
