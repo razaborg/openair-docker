@@ -2,13 +2,16 @@
 
 # STEP 1 : mysql setup 
 mkdir -p /usr/local/etc/oai/freeDiameter
-sed -e "s/@MYSQL_user@/${MYSQL_user}/" -e "s/@MYSQL_pass@/${MYSQL_pass}/" ETC/hss.conf > /usr/local/etc/oai/hss.conf 
+#sed -e "s/@MYSQL_user@/${MYSQL_user}/" -e "s/@MYSQL_pass@/${MYSQL_pass}/" ETC/hss.conf > /usr/local/etc/oai/hss.conf 
+
+cp /config/hss.conf /usr/local/etc/oai/
 
 # STEP 2 : config file creation
-cp ETC/acl.conf ETC/hss_fd.conf /usr/local/etc/oai/freeDiameter
+cp /config/acl.conf /config/hss_fd.conf /usr/local/etc/oai/freeDiameter
 
 # STEP 3 : configure FQDN
-echo "Hostname: $(hostname)"
+echo "Hostname (FQDN): $(hostname -f)"
+echo "Hostname (host): $(hostname)"
 
 # STEP 4 : check certificates
 ./SCRIPTS/check_hss_s6a_certificate /usr/local/etc/oai/freeDiameter $(hostname)
