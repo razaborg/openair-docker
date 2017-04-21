@@ -1,6 +1,6 @@
 # openair-docker
 
-This repo as for goal to present a properly-dockerized version of the openair-cn project.
+This repo aims to present a """properly-"""dockerized version of the openair-cn project.
 
 ### Next steps
 
