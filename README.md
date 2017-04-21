@@ -1,4 +1,3 @@
-# openair-docker
 
 This repo aims to present a """properly-"""dockerized version of the openair-cn project.
 
