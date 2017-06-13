@@ -8,9 +8,19 @@ mkdir -p /usr/local/etc/oai/freeDiameter
 #  -e "s/@MYSQL_db@/${MYSQL_DB}/" \
 #  -e "s/@MYSQL_server@/${MYSQL_HOST}/" /config/hss.conf > /usr/local/etc/oai/hss.conf && echo "[OK] HSS configuration succeed." || echo "[FAIL] HSS configuration failed."
 
+echo "############################"
+echo "ENV VARIABLES:"
+echo "- user: " ${MYSQL_USER}
+echo "- pass: " ${MYSQL_PASSWORD}
+echo "- host: " ${MYSQL_HOST}
+echo "- database: " ${MYSQL_DB}
+echo "############################"
 
 echo " --> hss.conf file copy..."
-cp /config/hss.conf /usr/local/etc/oai/
+#cp /config/hss.conf /usr/local/etc/oai/
+# Environment variables auto-substitution
+envsubst < /config/hss.conf > /usr/local/etc/oai/hss.conf 
+
 
 # STEP 2 : config file creation
 echo " --> acl.conf & hss_fd.conf files copy..."

@@ -28,6 +28,10 @@ services:
       - MYSQL_PASSWORD=openair
       - MYSQL_DB=oai_db
       - MYSQL_HOST=mysqldb
+    # DEBUG
+    #entrypoint: /bin/bash
+    #tty: true
+    #stdin_open: true
     networks:
       openair:
         ipv4_address: 172.13.37.10

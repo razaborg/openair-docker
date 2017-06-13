@@ -23,8 +23,8 @@ RUN ./SCRIPTS/build_hss -F --clean --debug
 # for debug purposes
 RUN sudo apt install inetutils-ping
 
+USER root
 COPY startup.sh ./
-RUN sudo chmod +x startup.sh
-#RUN chmod +x startup.sh
-ENTRYPOINT sudo ./startup.sh
+RUN chmod +x startup.sh
+ENTRYPOINT /bin/bash -c "source ./startup.sh"
 #RUN ./startup.sh
