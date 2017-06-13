@@ -1,13 +1,31 @@
 version: '2.1'
 
 services:
+  mysqldb:
+    image: mariadb
+    hostname: "mysqldb"
+    domainname: "openair4G.eur"
+    container_name: "mysqldb"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=oai_db
+    networks:
+      openair:
+        ipv4_address: 172.13.37.11
+    
+
   hss:
     image: openair-hss
     hostname: "hss"
     domainname: "openair4G.eur"
     container_name: openair-hss
+    depends_on:
+      - mysqldb
     volumes:
       - ./HSS/config:/config
+        #    entrypoint: /bin/bash
+        #stdin_open: true
+        #tty: true
     networks:
       openair:
         ipv4_address: 172.13.37.10
