@@ -7,7 +7,7 @@ services:
     domainname: "openair4G.eur"
     container_name: "mysqldb"
     environment:
-      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_ROOT_PASSWORD=openair
       - MYSQL_DATABASE=oai_db
     networks:
       openair:
@@ -23,9 +23,11 @@ services:
       - mysqldb
     volumes:
       - ./HSS/config:/config
-        #    entrypoint: /bin/bash
-        #stdin_open: true
-        #tty: true
+    environment:
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=openair
+      - MYSQL_DB=oai_db
+      - MYSQL_HOST=mysqldb
     networks:
       openair:
         ipv4_address: 172.13.37.10

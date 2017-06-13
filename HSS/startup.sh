@@ -3,7 +3,11 @@
 
 # STEP 1 : mysql setup 
 mkdir -p /usr/local/etc/oai/freeDiameter
-#sed -e "s/@MYSQL_user@/${MYSQL_user}/" -e "s/@MYSQL_pass@/${MYSQL_pass}/" ETC/hss.conf > /usr/local/etc/oai/hss.conf 
+#sed -e "s/@MYSQL_user@/${MYSQL_USER}/" \
+#  -e "s/@MYSQL_pass@/${MYSQL_PASSWORD}/" \
+#  -e "s/@MYSQL_db@/${MYSQL_DB}/" \
+#  -e "s/@MYSQL_server@/${MYSQL_HOST}/" /config/hss.conf > /usr/local/etc/oai/hss.conf && echo "[OK] HSS configuration succeed." || echo "[FAIL] HSS configuration failed."
+
 
 echo " --> hss.conf file copy..."
 cp /config/hss.conf /usr/local/etc/oai/
@@ -25,7 +29,7 @@ echo " --> checking for certificates..."
 #service mysql status
 #mysql -u root -e "create database oai_db"
 echo " --> setting up the example database..."
-mysql --host mysqldb -uroot -proot oai_db < ./SRC/OAI_HSS/db/oai_db.sql && echo "[OK] Database Updated" || echo "[FAIL] Database Non Updated"
+mysql --host "${MYSQL_HOST}" -u"${MYSQL_USER}" -p"${MYSQL_PASSWORD}" "${MYSQL_DB}" < ./SRC/OAI_HSS/db/oai_db.sql && echo "[OK] Database Updated" || echo "[FAIL] Database Non Updated"
 
 echo " --> running the daemon"
 # HSS daemon start
