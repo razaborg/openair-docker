@@ -32,15 +32,16 @@ echo "Hostname (host): $(hostname -s)"
 
 # STEP 4 : check certificates
 echo " --> checking for certificates..."
-./SCRIPTS/check_hss_s6a_certificate /usr/local/etc/oai/freeDiameter $(hostname)
+./scripts/check_hss_s6a_certificate /usr/local/etc/oai/freeDiameter $(hostname)
 
 # Mysql daemon run
 #service mysql start
 #service mysql status
 #mysql -u root -e "create database oai_db"
 echo " --> setting up the example database..."
-mysql --host "${MYSQL_HOST}" -u"${MYSQL_USER}" -p"${MYSQL_PASSWORD}" "${MYSQL_DB}" < ./SRC/OAI_HSS/db/oai_db.sql && echo "[OK] Database Updated" || echo "[FAIL] Database Non Updated"
+mysql --host "${MYSQL_HOST}" -u"${MYSQL_USER}" -p"${MYSQL_PASSWORD}" "${MYSQL_DB}" < ./src/oai_hss/db/oai_db.sql && echo "[OK] Database Updated" || echo "[FAIL] Database Non Updated"
+mysql --host "${MYSQL_HOST}" -u"${MYSQL_USER}" -p"${MYSQL_PASSWORD}" "${MYSQL_DB}" < /config/init.sql && echo "[OK] MME identity imported" || echo "[FAIL] Failed to import the MME identity in the DB."
 
 echo " --> running the daemon"
 # HSS daemon start
-./SCRIPTS/run_hss -i ./SRC/OAI_HSS/db/
+./scripts/run_hss 
