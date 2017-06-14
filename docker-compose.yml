@@ -43,11 +43,13 @@ services:
     container_name: openair-mme
     volumes:
       - ./MME/config:/config
+   # DEBUG
+   #entrypoint: /bin/bash
+   # tty: true
+   # stdin_open: true
     networks:
       openair:
         ipv4_address: 172.13.37.20
-    depends_on:
-      - hss
 
 networks:
   openair:
