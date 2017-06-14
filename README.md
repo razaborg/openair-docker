@@ -22,9 +22,8 @@ The repo is organized as following :
     .
     ├── HSS
     │   └── config
-    ├── MME
-    │   └── config
-    └── openair-cn
+    └── MME
+       └── config
 
 A docker-compose file is located at the root allowing you to run a working configuration for the MME/HSS part of the EPC.
 
@@ -39,7 +38,6 @@ The MME folder contains :
 + startup.sh script to autoconfigure the container at start-up and run the MME service
 + a config folder containing all the configuration files needed for the MME
 
-The openair-cn is a submodule containing the source code of the [openair-cn project](https://gitlab.eurecom.fr/oai/openair-cn)
 
 
 # Build the images
