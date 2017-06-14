@@ -40,7 +40,6 @@ services:
     #stdin_open: true
     networks:
       S6a-iface:
-        #ipv4_address: 10.0.1.10
       mysqldb-net:
   
   mme:
@@ -58,9 +57,7 @@ services:
       - hss
     networks:
       S6a-iface:
-        #ipv4_address: 10.0.1.20
       S1C-iface:
-        #ipv4_address: 10.0.2.20
       S11-iface:
 
 networks:
