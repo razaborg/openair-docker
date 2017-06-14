@@ -9,6 +9,11 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=openair
       - MYSQL_DATABASE=oai_db
+    healthcheck:
+      test: ["CMD", "mysqladmin", "-u", "root", "-popenair", "status"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
     networks:
       openair:
         ipv4_address: 172.13.37.11
@@ -20,7 +25,8 @@ services:
     domainname: "openair4G.eur"
     container_name: openair-hss
     depends_on:
-      - mysqldb
+      mysqldb:
+        condition: service_healthy
     volumes:
       - ./HSS/config:/config
     environment:
@@ -47,6 +53,8 @@ services:
    #entrypoint: /bin/bash
    # tty: true
    # stdin_open: true
+    depends_on:
+      - hss
     networks:
       openair:
         ipv4_address: 172.13.37.20
