@@ -15,15 +15,15 @@ services:
       timeout: 3s
       retries: 10
     networks:
-      openair:
-        ipv4_address: 172.13.37.11
-    
+      - mysqldb-net
 
   hss:
     image: openair-hss
     hostname: "hss"
     domainname: "openair4G.eur"
     container_name: openair-hss
+    links:
+      - mysqldb
     depends_on:
       mysqldb:
         condition: service_healthy
@@ -39,8 +39,9 @@ services:
     #tty: true
     #stdin_open: true
     networks:
-      openair:
-        ipv4_address: 172.13.37.10
+      S6a-iface:
+        ipv4_address: 10.0.1.10
+      mysqldb-net:
   
   mme:
     image: openair-mme
@@ -49,21 +50,31 @@ services:
     container_name: openair-mme
     volumes:
       - ./MME/config:/config
-   # DEBUG
-   #entrypoint: /bin/bash
-   # tty: true
-   # stdin_open: true
+    # DEBUG
+    #entrypoint: /bin/bash
+    #tty: true
+    #stdin_open: true
     depends_on:
       - hss
     networks:
-      openair:
-        ipv4_address: 172.13.37.20
+      S6a-iface:
+        ipv4_address: 10.0.1.20
+      S11-iface:
+        ipv4_address: 10.0.2.20
 
 networks:
-  openair:
+  S6a-iface:
     driver: bridge
     enable_ipv6: false
     ipam:
       driver: default
       config:
-        - subnet: 172.13.37.0/24
+        - subnet: 10.0.1.0/24
+  S11-iface:
+    driver: bridge
+    enable_ipv6: false
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.0.2.0/24
+  mysqldb-net:
