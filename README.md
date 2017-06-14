@@ -4,7 +4,6 @@ This repo aims to present a """properly-"""dockerized version of the openair-cn 
 ### Next steps
 
 + Use an external freeDiameter container for the MME/HSS
-+ Use and external mysql container for the HSS
 + Make a SP_GW container
 
 ### Warning : docker for Mac users (windows users might be concerned too)
@@ -61,4 +60,11 @@ And in a more archaic way :
     docker run -it -h "mme.openair4G.eur" -v $(pwd)/config:/config openair-mme
 
 
-But the IP raw defined in the config file (freediameter configuration) will probably fuck everything up... You're warned
+But the IP raw defined in the config file (freediameter configuration) will probably fuck everything up... You're warned, running it without the compose file is probably not such a great idea...
+
+
+## Demo
+
+![Log](http://i.imgur.com/GHVtU2e.jpg)
+
+![Capture](http://i.imgur.com/JvaJSnE.jpg)
