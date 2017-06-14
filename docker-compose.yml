@@ -40,7 +40,7 @@ services:
     #stdin_open: true
     networks:
       S6a-iface:
-        ipv4_address: 10.0.1.10
+        #ipv4_address: 10.0.1.10
       mysqldb-net:
   
   mme:
@@ -58,9 +58,10 @@ services:
       - hss
     networks:
       S6a-iface:
-        ipv4_address: 10.0.1.20
+        #ipv4_address: 10.0.1.20
+      S1C-iface:
+        #ipv4_address: 10.0.2.20
       S11-iface:
-        ipv4_address: 10.0.2.20
 
 networks:
   S6a-iface:
@@ -70,11 +71,18 @@ networks:
       driver: default
       config:
         - subnet: 10.0.1.0/24
-  S11-iface:
+  S1C-iface:
     driver: bridge
     enable_ipv6: false
     ipam:
       driver: default
       config:
         - subnet: 10.0.2.0/24
+  S11-iface:
+    driver: bridge
+    enable_ipv6: false
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.0.3.0/24
   mysqldb-net:

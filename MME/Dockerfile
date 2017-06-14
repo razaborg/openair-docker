@@ -1,6 +1,6 @@
 FROM ubuntu:14.04
 
-RUN apt-get update && apt-get -y install git sudo make gcc cmake libsctp-dev lksctp-tools wget
+RUN apt-get update && apt-get -y install git sudo make gcc cmake libsctp-dev lksctp-tools wget dnsutils
 WORKDIR /root/
 RUN git clone -b develop https://gitlab.eurecom.fr/oai/openair-cn.git 
 WORKDIR /root/openair-cn/
